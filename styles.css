@@ -1,129 +1,1523 @@
+/* ==========================================================================
+   Global Styles & Variables
+   ========================================================================== */
+html {
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth; /* Moved from #main for global effect if needed */
+}
+
 body {
-  background-color: rgb(0, 0, 0);
-}
-
-p,
-pre,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  line-height: 2;
-}
-
-a:link {
-  color: white;
-  padding: 10px 15px;
-  text-align: center;
-  display: inline-block;
-}
-
-a:hover,
-a:active {
-  color: rgb(154, 154, 154);
-}
-
-button {
-  background-color: rgba(0, 0, 0, 0);
-  color: rgb(255, 255, 255);
-  padding: 0.3cm;
-  text-align: center;
-  display: inline-block;
-  font-size: 20px;
-  margin: 0px 5px;
-  cursor: pointer;
-  border: none;
-}
-
-button:hover {
-  color: rgb(103, 103, 103);
-}
-
-iframe {
-  width: 100%;
-  height: 18cm;
-  .content {
-    max-width: 500px;
-    margin: auto;
-  }
-}
-
-header {
-  position: relative;
-  height: 3cm;
-  padding-top: 0;
-}
-
-header img {
-  width: 4cm;
-  height: auto;
   margin: 0;
-  margin-top: 0cm;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden; /* Prevent body scrolling, #main handles content scroll */
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar,
+#main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* CSS Custom Properties (Variables) */
+:root {
+  --max-width-container: 1200px;
+  --padding-desktop: 2rem;
+  --padding-mobile: 1rem;
+  --padding-container-horizontal-desktop: 20px;
+  --padding-container-horizontal-mobile: 15px;
+
+  --color-text: #fff;
+  --color-text-muted: rgba(255, 255, 255, 0.8);
+  --color-text-subtle: rgba(255, 255, 255, 0.6);
+  --color-text-interactive: #9a9a9a; /* Used for nav hover */
+  --color-text-interactive-alt: #888; /* Used for other nav hover */
+
+  --color-bg-transparent-light: rgba(255, 255, 255, 0.03);
+  --color-bg-transparent-medium: rgba(255, 255, 255, 0.05);
+  --color-bg-transparent-dark: rgba(255, 255, 255, 0.1);
+  --color-border-transparent-light: rgba(255, 255, 255, 0.1);
+  --color-border-transparent-medium: rgba(255, 255, 255, 0.2);
+  --color-border-transparent-strong: rgba(255, 255, 255, 0.3);
+
+  --transition-duration: 0.3s;
+  --transition-timing: ease;
+  --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --loader-keyword: #ff79c6;
+  --loader-function: #8be9fd;
+  --loader-string: #f1fa8c;
+  --loader-variable: #bd93f9;
+}
+
+/* ==========================================================================
+   Layout Structure
+   ========================================================================== */
+#main {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .content {
-  max-width: 980px;
-  margin: auto;
-  padding: 0px 0px;
-  overflow: hidden;
-}
-
-.half {
-  float: left;
-  max-width: 50%;
-}
-
-.photo {
-  margin: 5px;
-}
-
-.photo:hover {
-  opacity: 0.3;
-}
-
-img {
   width: 100%;
-  height: auto;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.landing {
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-inner {
+  width: 100%;
+  max-width: var(--max-width-container);
+  padding: var(--padding-desktop);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Specific override for landing section's inner content */
+.landing > .content-inner {
+  /* More specific selector */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Common container style for centered content */
+.centered-container {
+  width: 100%;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 0 var(--padding-container-horizontal-desktop);
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Section title centering */
+.section-title {
+  width: 100%;
+  text-align: center;
+  margin: 4rem 0 3rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* About section specific */
+.about-text {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-bg-transparent-light);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-transparent-light);
+}
+
+/* Project grid centering */
+.project-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin: 0 auto;
+}
+
+/* Photo grid centering */
+.photo-grid {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .content-inner {
+    padding: var(--padding-mobile);
+  }
+
+  .centered-container {
+    padding: 0 var(--padding-container-horizontal-mobile);
+  }
+
+  .about-text {
+    padding: 1.5rem;
+  }
+
+  .photo-grid {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .project-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Typography & Common Elements
+   ========================================================================== */
+.section-title {
+  /* Base for all main section titles */
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 4rem 0 3rem;
+  text-align: center;
+  color: var(--color-text);
+  padding-bottom: 1rem; /* Consider if a border-bottom is intended */
+  width: 100%; /* Takes full width of its container */
+}
+
+/* Base styles for card-like elements */
+.card-base {
+  background: var(--color-bg-transparent-medium);
+  border-radius: 12px; /* Standardized border-radius */
+  padding: var(--padding-desktop);
+  transition: all var(--transition-duration) var(--transition-cubic);
+  border: 1px solid var(--color-border-transparent-light);
+  box-sizing: border-box;
+  width: 100%; /* Ensure cards take full width of their grid cell/container */
+}
+
+.card-base:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08); /* Slightly different, keep for now */
+  border-color: var(--color-border-transparent-medium);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphism effect for specific cards */
+.glass-card {
+  background: var(--color-bg-transparent-light);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-transparent-light);
+  padding: 2.5rem; /* Specific padding for these cards */
+  margin: 0 auto; /* Centering if not in a flex/grid container */
+}
+
+/* ==========================================================================
+   Navigation System (Rebuilt)
+   ========================================================================== */
+
+/* --- Base for Navigational Elements --- */
+.nav-element {
+  font-family: "Montserrat", sans-serif;
+  color: var(--color-text) !important;
+  text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-timing),
+    opacity var(--transition-duration) var(--transition-timing);
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+.nav-element:hover,
+.nav-element:focus {
+  color: var(--color-text) !important;
+  opacity: 1;
+}
+
+/* --- Sticky Navigation Bar --- */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 20px var(--padding-container-horizontal-desktop);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: transparent; /* Initially transparent */
+  transition: background-color var(--transition-duration)
+      var(--transition-timing),
+    backdrop-filter var(--transition-duration) var(--transition-timing),
+    opacity var(--transition-duration) var(--transition-timing);
+  opacity: 0; /* Hidden initially */
+  backdrop-filter: blur(0px);
+}
+
+.sticky-nav.visible {
+  background: rgba(10, 10, 10, 0.7); /* Dark, subtle transparent background */
+  backdrop-filter: blur(10px);
+  opacity: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle bottom border */
+}
+
+body.menu-open .sticky-nav {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom-color: transparent !important;
+}
+
+.nav-brand {
+  composes: nav-element;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-text) !important;
+}
+
+.nav-links {
+  /* Desktop links container */
+  display: flex;
+  align-items: center;
+  gap: 35px; /* Increased gap */
+}
+
+.nav-link {
+  /* Desktop individual links */
+  composes: nav-element;
+  font-size: 0.9rem;
+  font-weight: 300;
+  position: relative;
+  color: var(--color-text) !important;
+}
+
+/* Subtle underline effect for desktop nav links */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-text);
+  transition: width var(--transition-duration) var(--transition-timing);
+  opacity: 0.7;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%;
+}
+
+/* --- Landing Page Navigation --- */
+.landing-title {
+  composes: centered-container; /* Apply common centered styles */
+  font-weight: 400;
+  font-size: min(10vw, 10vh, 1.5cm);
+  padding-top: min(15vh - 5vw, 30vh);
+  margin-bottom: 0; /* Remove default h1 margin if nav-container provides spacing */
+}
+
+.nav-container {
+  /* Wrapper for landing nav group */
+  composes: centered-container;
+}
+
+.landing-nav-group {
+  composes: centered-container;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: min(3vw, 3vh, 0.8cm);
+  margin-top: min(5vh, 5vw, 1.2cm);
+  width: 100%;
+  max-width: 800px; /* Match about-text max-width for consistency */
+}
+
+.landing-nav-link {
+  composes: nav-element;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.75rem 1rem; /* Match project-button padding */
+  border: 1px solid var(--color-border-transparent-strong);
+  border-radius: 6px;
+  background: var(--color-bg-transparent-medium);
+  color: var(--color-text) !important;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  min-width: 100px; /* Ensure minimum width */
+  text-align: center;
+  text-decoration: none; /* Remove underline */
+  transition: opacity 0.7s var(--transition-cubic),
+    transform 0.7s var(--transition-cubic),
+    color var(--transition-duration) var(--transition-timing),
+    background-color var(--transition-duration) var(--transition-timing),
+    border-color var(--transition-duration) var(--transition-timing);
+}
+
+.landing-nav-link:hover,
+.landing-nav-link:focus {
+  background: var(--color-bg-transparent-dark);
+  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transform: translateY(-2px);
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+.landing-nav-link.animated {
+  opacity: 0.9;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* --- Burger Menu --- */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around; /* Adjusted for even spacing */
+  width: 28px; /* Slightly smaller */
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1005; /* Above sticky nav, below mobile menu content if needed */
+  position: relative;
+}
+
+.burger-menu span {
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 1px;
+  transition: all 0.35s var(--transition-cubic);
+  transform-origin: center;
+}
+
+.burger-menu.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px); /* Optional: slide out */
+}
+
+.burger-menu.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Mobile Menu --- */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0; /* Start from left for right slide-in */
+  width: 100vw;
   height: 100vh;
+  background: rgba(5, 5, 5, 0.9); /* Very dark, almost opaque */
+  backdrop-filter: blur(15px);
+  flex-direction: column;
+  justify-content: center; /* Center items vertically */
+  align-items: center;
+  gap: 35px;
+  transition: transform 0.4s var(--transition-cubic), visibility 0.4s;
+  z-index: 1004; /* Below burger icon, above content */
+  transform: translateX(-100%); /* Start off-screen to the left */
+  visibility: hidden;
 }
 
-.center {
+.mobile-menu.active {
+  transform: translateX(0%);
+  visibility: visible;
+}
+
+.mobile-nav-brand {
+  composes: nav-element;
+  font-size: 1.8rem;
+  font-weight: 500;
+  opacity: 1;
+  color: var(--color-text) !important;
+}
+
+.mobile-nav-link {
+  composes: nav-element;
+  font-size: 1.3rem;
+  font-weight: 300;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: var(--color-text) !important;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Social Links (Shared & Specifics) --- */
+.social-links {
+  /* Container for desktop */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mobile-social-links {
+  display: flex;
+  gap: 25px; /* Slightly larger gap for mobile */
+  margin-top: 20px; /* Space above mobile social links */
+  position: absolute; /* Position at bottom of mobile menu */
+  bottom: 40px;
+}
+
+.social-link {
+  composes: nav-element;
+  opacity: 0.7;
+  color: var(--color-text) !important;
+}
+
+.social-link:hover,
+.social-link:focus {
+  opacity: 1;
+  transform: scale(1.1); /* Slight scale on hover */
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
   display: block;
-  margin: auto;
-  max-width: 75%;
 }
 
-html,
-body,
-#canvas {
-  width: 100%;
-  height: 100vh;
+.mobile-social-links .social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==========================================================================
+   Page Sections
+   ========================================================================== */
+
+/* --- Landing Section Specifics --- */
+.landing {
+  position: relative; /* For potential absolute positioned children */
+  overflow: hidden; /* If any child tries to break out */
+}
+
+.profile-image {
+  width: auto; /* Maintain aspect ratio */
+  max-height: min(100vw, 65vh, 25cm); /* Responsive max height */
+  mix-blend-mode: lighten;
+  display: block; /* To apply margin:auto if needed, and remove bottom space */
+  margin: 2rem auto 0; /* Add some top margin */
+}
+
+/* --- About Section --- */
+.about {
+  /* .content provides base structure, .content-inner provides padding */
+}
+
+.about-text {
+  composes: glass-card; /* Use the glass card base */
+  text-align: center;
+  font-size: min(0.43cm, 3vw);
+  line-height: 2;
+}
+
+.about-text p {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.about-text .highlight {
+  /* color: var(--color-text); Inherited */
+  font-weight: 500;
+}
+
+.about-text .subtitle {
+  font-size: 1.2em; /* Relative to parent .about-text font-size */
+  font-weight: 500;
+  margin: 2rem 0 1rem;
+  /* color: var(--color-text); Inherited */
+}
+
+.about-text .interests {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.interest-tag {
+  background: var(--color-bg-transparent-dark);
+  padding: 0.5em 1em; /* Use em for padding relative to font size */
+  border-radius: 20px;
+  font-size: 0.9em; /* Relative to parent .about-text font-size */
+  transition: all var(--transition-duration) var(--transition-cubic);
+}
+
+.interest-tag:hover {
+  background: rgba(255, 255, 255, 0.15); /* Keep if distinct enough */
+  transform: translateY(-2px);
+}
+
+/* --- Development Section (Projects) --- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  /* max-width, margin, width, box-sizing handled by .content-inner if project-grid is direct child */
+  /* padding: 2rem; This would be in addition to .content-inner padding. Re-evaluate. */
+  align-items: start; /* Changed from stretch to allow varying heights if needed */
+}
+
+.project-item {
+  composes: card-base; /* Use the card base */
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-text);
+  word-wrap: break-word; /* Ensure long titles wrap */
+}
+
+.project-item p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  flex-grow: 1; /* Allows description to take up space and push links down */
+  word-wrap: break-word;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto; /* Pushes links to the bottom of the card */
+  flex-wrap: wrap; /* Allow buttons to wrap if space is limited */
+}
+
+.project-button {
+  composes: nav-element;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-border-transparent-strong);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: var(--color-bg-transparent-medium);
+  color: var(--color-text) !important;
+  text-decoration: none;
+  transition: all var(--transition-duration) var(--transition-cubic);
+}
+
+.project-button:hover {
+  background: var(--color-bg-transparent-dark);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--color-text) !important;
+}
+
+/* --- Skills Section --- */
+.skills-container {
+  composes: glass-card;
+  max-width: 800px; /* Specific max width */
+  padding: var(--padding-desktop); /* Override glass-card padding if needed */
+}
+
+.skills-category {
+  margin-bottom: 3rem;
+}
+.skills-category:last-child {
+  margin-bottom: 0;
+}
+
+.skills-title {
+  /* Sub-title within skills container */
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  /* Consider grid-template-columns if more complex layout is needed */
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-name {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9); /* Slightly less muted */
+}
+
+.skill-level {
+  height: 8px;
+  background: var(--color-bg-transparent-dark);
+  border-radius: 4px;
+  overflow: hidden; /* To contain the progress bar */
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2),
+    /* Softer gradient start */ rgba(255, 255, 255, 0.4)
+      /* Softer gradient end */
+  );
+  border-radius: 4px;
+  width: 0; /* Initial state for animation */
+  transition: width 1.2s var(--transition-cubic); /* Smooth animation */
+}
+.skill-progress.visible {
+  width: var(--progress-width);
+}
+
+/* --- Experience & Education Section --- */
+.experience-education-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Default two columns */
+  gap: 2rem; /* Gap between columns */
+  /* max-width, margin, width handled by .content-inner */
+}
+
+.column-title {
+  /* Title for 'Experience' / 'Education' */
+  font-size: 1.5rem; /* Same as .skills-title */
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.experience-column,
+.education-column {
+  width: 100%; /* Take full width of their grid cell */
+}
+
+/* Shared styles for timeline and education list containers */
+.list-container-base {
+  composes: glass-card;
+  padding: 1.5rem; /* Specific padding */
+  max-width: 100%; /* Take full width of parent column */
+}
+
+.timeline-container {
+  composes: list-container-base;
+  position: relative; /* For the ::before pseudo-element line */
+}
+
+.timeline-container::before {
+  /* The vertical line */
+  content: "";
+  position: absolute;
+  left: 1rem; /* Aligns with timeline-dot */
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--color-border-transparent-light);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex; /* Align dot and content */
+  align-items: flex-start;
+  opacity: 0; /* For animation */
+  transform: translateX(-20px); /* For animation */
+  transition: all 0.5s var(--transition-cubic);
+}
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--color-border-transparent-strong);
+  border-radius: 50%;
+  position: absolute;
+  left: 1rem; /* Position on the line */
+  transform: translateX(-50%); /* Center the dot on the line */
+  top: 0.2em; /* Align with first line of text, adjust as needed */
+  z-index: 1; /* Above the line */
+}
+
+.timeline-content {
+  /* Content box for each timeline item */
+  background: var(--color-bg-transparent-medium);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-left: 2.5rem; /* Space from the timeline line/dot */
+  width: calc(100% - 2.5rem); /* Fill remaining space */
+}
+
+.timeline-title {
+  /* Job/Role title */
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0; /* Reduced bottom margin */
+  color: var(--color-text);
+}
+
+.timeline-company {
+  /* Company name */
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-muted);
+}
+
+.timeline-date {
+  font-size: 0.9rem;
+  color: var(--color-text-subtle);
+  margin: 0 0 1rem 0;
+}
+
+.timeline-description {
+  /* ul element */
+  list-style-type: none;
+  padding: 0;
   margin: 0;
 }
 
-body {
-  background-color: #000000;
+.timeline-description li {
+  position: relative;
+  padding-left: 1.5rem; /* Space for bullet */
+  margin-bottom: 0.5rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
 }
 
-#wrapper {
+.timeline-description li::before {
+  content: "•";
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-}
-#menu {
-  width: 100%;
+  left: 0;
+  color: var(--color-text-subtle);
 }
 
-.about {
-  padding-top: 50px;
-  padding-bottom: 50px;
+.education-container {
+  composes: list-container-base;
+}
+
+.education-item {
+  margin-bottom: 2rem;
+  opacity: 0; /* For animation */
+  transform: translateX(20px); /* For animation */
+  transition: all 0.5s var(--transition-cubic);
+}
+.education-item:last-child {
+  margin-bottom: 0;
+}
+.education-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.education-title {
+  /* Degree name */
+  font-size: 1.5rem; /* Consistent with .column-title & .skills-title */
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+  color: var(--color-text);
+}
+
+.education-school {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-muted);
+}
+
+.education-date {
+  font-size: 1rem; /* Slightly larger than timeline date */
+  color: var(--color-text-subtle);
+  margin: 0 0 1.5rem 0;
+}
+
+.education-details {
+  /* Inner box for GPA, courses etc. */
+  background: var(--color-bg-transparent-medium);
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.education-gpa {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1.5rem 0;
+}
+
+.education-subtitle {
+  /* For 'Skills Developed', 'Achievements' */
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 1.5rem 0 1rem 0;
+  color: var(--color-text);
+}
+.education-subtitle:first-child {
+  margin-top: 0;
+}
+
+.education-courses,
+.education-achievements {
+  /* ul elements */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.education-courses li,
+.education-achievements li {
+  /* Share styling with timeline description items */
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.education-courses li::before,
+.education-achievements li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-text-subtle);
+}
+
+/* --- Photography Section --- */
+.photo-grid {
+  display: flex; /* Changed from grid to flex for column layout */
+  gap: 1rem;
+  /* max-width, margin, width by .content-inner */
+  /* padding: 1rem; This is in addition to .content-inner. Keep if desired. */
+}
+
+.photo-column {
+  flex: 1; /* Each column takes equal space */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between photos in a column */
+}
+
+.photo-item {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform var(--transition-duration) var(--transition-timing);
+}
+
+.photo-item:hover {
+  transform: scale(1.02);
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove bottom space */
+  transition: opacity var(--transition-duration) var(--transition-timing);
+}
+
+.photo-item:hover img {
+  opacity: 0.9;
+}
+
+/* --- Signature Section --- */
+.signature-section {
+  width: 100%;
+  display: flex; /* To center the .signature link */
+  justify-content: center;
+  padding: 10px 0 40px 0; /* Keep specific padding */
+  margin-top: 0; /* Usually a footer, so directly after content */
+  background: var(--color-bg-transparent-light);
+  border-top: 1px solid var(--color-border-transparent-light);
+}
+
+.signature {
+  /* This is an <a> tag */
+  display: flex; /* For column layout of image and text */
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit; /* Inherit text color from body/parent */
+  transition: transform var(--transition-duration) var(--transition-timing);
+}
+
+.signature:hover {
+  transform: translateY(-2px); /* Lift effect */
+}
+
+.signature-img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(0.2) brightness(0.95);
+  opacity: 0.85;
+  transition: all var(--transition-duration) var(--transition-timing); /* Use 'all' for filter, opacity, transform */
+}
+
+.signature:hover .signature-img {
+  opacity: 1;
+  filter: grayscale(0) brightness(1.2); /* Increased brightness slightly */
+  transform: scale(1.05); /* Slight scale in addition to parent's lift */
+}
+
+.copyright-text {
+  font-size: 0.9rem;
+  color: var(--color-text-subtle); /* Use variable */
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  margin-top: 0.5rem; /* Add some space above copyright text */
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.center {
+  /* For block elements that need to be centered */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   Animations & Transitions (General, not component specific entrance anims)
+   ========================================================================== */
+/* Keyframes used by multiple elements or for general purpose */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 1s ease-in;
+} /* Applied to profile image */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* .content uses a similar transition on visibility, not keyframe directly */
+
+/* Default transition for common interactive elements (already applied via composes or directly)
+.nav-button, .project-button, .interest-tag {
+  transition: all var(--transition-duration) var(--transition-cubic);
+}
+.project-item {
+  transition: all 0.4s var(--transition-cubic); // Slightly longer, keep if intended
+}
+*/
+
+/* ==========================================================================
+   Lightbox
+   ========================================================================== */
+.lightbox {
+  display: none; /* Controlled by JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000; /* Highest z-index */
+  cursor: pointer; /* Indicate clickable to close */
+  backdrop-filter: blur(5px); /* Added subtle blur to background content */
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90vh;
+  margin: auto; /* Center in flex/grid, but with absolute easier */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain; /* Ensure image is not cropped */
+}
+
+.lightbox-close {
+  position: fixed; /* Relative to viewport */
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-text);
+  font-size: 24px; /* Adjusted for better visual balance */
+  line-height: 40px; /* Vertically center the times symbol */
+  text-align: center;
+  cursor: pointer;
+  display: flex; /* Use flex for centering if needed, but line-height good for single char */
+  align-items: center;
+  justify-content: center;
+  z-index: 10001; /* Above lightbox image */
+  transition: background-color var(--transition-duration)
+    var(--transition-timing);
+}
+
+.lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================================================
+   Custom Cursor (Desktop Only)
+   ========================================================================== */
+.cursor {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999; /* High, but below lightbox */
+  box-shadow: 0 0 75px 30px rgba(255, 255, 255, 0.3);
+  mix-blend-mode: screen; /* Changed from exclusion for a lighter effect */
+  display: none; /* Hidden by default, shown in media query */
+  transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease,
+    box-shadow 0.1s ease; /* Smoother active state */
+}
+
+.cursor.active {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.4); /* More subtle when active */
+  box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Loading Screen
+   ========================================================================== */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10002; /* Highest, above everything else initially */
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  /* Content within the loader */
+  display: flex; /* Already was, ensure it's needed */
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.code-container {
+  position: relative; /* For absolute positioning if children needed it */
+  padding: 20px;
+  background: var(--color-bg-transparent-light);
+  border-radius: 8px;
+  border: 1px solid var(--color-border-transparent-light);
+  min-width: 300px; /* Ensure it has some width */
+}
+
+.code-line {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInLine 0.5s forwards; /* Forwards keeps the to state */
+}
+
+/* Staggered animation delays for code lines */
+.code-line:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.code-line:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.code-line:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.code-line:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.code-line:nth-child(5) {
+  animation-delay: 1s;
+} /* Explicit .0 for consistency */
+.code-line:nth-child(6) {
+  animation-delay: 1.2s;
+}
+
+/* Syntax highlighting for loader */
+.loader .keyword {
+  color: var(--loader-keyword);
+}
+.loader .function {
+  color: var(--loader-function);
+}
+.loader .string {
+  color: var(--loader-string);
+}
+.loader .variable {
+  color: var(--loader-variable);
+}
+
+@keyframes fadeInLine {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Blinking cursor keyframe (if re-added)
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+*/
+
+/* Body states for loading */
+body.loading {
+  overflow: hidden; /* Prevent scrolling main content while loader is active */
+}
+
+body.loading #main {
+  opacity: 0;
+  transition: opacity 0.5s ease-in; /* Fade in main content */
+}
+
+body.loaded #main {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Media Queries - Grouped for better maintainability
+   ========================================================================== */
+
+/* --- Tablet and Smaller (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .experience-education-container {
+    grid-template-columns: 1fr; /* Stack columns */
+    gap: 3rem; /* Increased gap for stacked layout */
+  }
+
+  .timeline-container,
+  .education-container,
+  .list-container-base {
+    /* Apply to base for consistency */
+    padding: 1.25rem;
+  }
+}
+
+/* --- Mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .content-inner {
+    padding: var(--padding-mobile);
+  }
+  .landing > .content-inner {
+    /* Keep landing specific padding override */
+    padding: 0;
+  }
+
+  .section-title {
+    font-size: 2rem; /* Slightly smaller section titles */
+    margin: 3rem 0 2rem;
+  }
+
+  /* About Section Mobile */
+  .about {
+    padding: 2rem 1rem;
+  } /* Old style, review if .content-inner is enough */
+  .about-text {
+    padding: 1.5rem;
+    font-size: 1rem; /* Overrides min() from desktop */
+  }
+  .about-text .interests {
+    gap: 0.5rem;
+  }
+  .interest-tag {
+    font-size: 0.85em;
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* Photo Grid Mobile */
+  .photo-grid {
+    /* display: flex; is default */
+    flex-direction: column; /* Stack columns if they were side-by-side */
+    padding: 0; /* Remove padding if .content-inner handles it */
+    gap: 0.5rem;
+  }
+  .photo-column {
+    gap: 0.5rem;
+  }
+  /* If .photo-grid was using CSS grid, then:
+  .photo-grid { grid-template-columns: 1fr; padding: 1rem; }
+  */
+
+  /* Skills Section Mobile */
+  .skills-container,
+  .list-container-base.skills-container {
+    /* If skills-container also gets list-container-base */
+    padding: 1.5rem;
+  }
+  .skills-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .skills-grid {
+    gap: 1rem;
+  }
+
+  /* Experience & Education Mobile */
+  .column-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .timeline-content,
+  .education-details {
+    padding: 1.25rem;
+  }
+  .timeline-dot {
+    top: 0.35em; /* May need slight adjustment for smaller fonts */
+  }
+
+  /* Navigation Mobile Overrides */
+  .sticky-nav {
+    padding: 15px var(--padding-container-horizontal-mobile);
+  }
+  .nav-links,
+  .social-links {
+    display: none;
+  } /* Hide desktop nav parts in sticky-nav */
+  .burger-menu {
+    display: flex;
+  } /* Show burger */
+  .mobile-menu {
+    display: flex;
+  } /* Base display for JS to toggle with .active */
+
+  .nav-brand {
+    font-size: 1.1rem; /* Smaller brand in sticky nav on mobile */
+  }
+
+  .landing-nav-group {
+    gap: min(2vw, 2vh, 0.5cm); /* Adjusted gap for mobile */
+  }
+
+  /* Signature Section Mobile */
+  .signature-section {
+    padding: 40px 0;
+    margin-top: 40px;
+  }
+  .signature-img {
+    max-width: 140px;
+  }
+  .copyright-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* --- Desktop Specific (min-width: 769px) --- */
+@media (min-width: 769px) {
+  /* Hide mobile-specific elements */
+  .burger-menu,
+  .mobile-menu {
+    display: none !important;
+  }
+
+  /* Show desktop-specific elements */
+  .nav-links,
+  .social-links {
+    display: flex;
+  }
+
+  /* Custom Cursor Logic - Keep as is */
+  * {
+    cursor: none !important;
+  }
+  .cursor {
+    display: block;
+  }
+}
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.carousel-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  position: relative;
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease;
+  gap: 2rem;
+  align-items: center;
+}
+
+.project-item {
+  flex: 0 0 600px;
+  height: 400px;
+  background: var(--color-background-transparent);
+  border: 1px solid var(--color-border-transparent-strong);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.6s ease;
+  opacity: 0.3;
+  transform: scale(0.8);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.project-item h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.project-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  flex-grow: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  z-index: 3;
+  position: relative;
+}
+
+.carousel-prev,
+.carousel-next {
+  background: var(--color-background-transparent);
+  border: 1px solid var(--color-border-transparent-strong);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-text);
+  font-size: 1.5rem;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: var(--color-background);
+  transform: scale(1.1);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .project-item {
+    flex: 0 0 280px;
+    height: 350px;
+    padding: 1.5rem;
+  }
+
+  .carousel-wrapper {
+    max-width: 100%;
+  }
+
+  .carousel-controls {
+    margin-top: 1.5rem;
+  }
 }

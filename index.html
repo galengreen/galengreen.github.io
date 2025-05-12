@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <title>
         Galen Green
@@ -11,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000" />
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -20,113 +21,451 @@
 </head>
 
 <body class="Black Background">
+    <div class="loader">
+        <div class="loader-content">
+            <div class="code-container">
+                <div class="code-line"><span class="keyword">const</span> <span class="variable">site</span> = <span
+                        class="string">'galengreen.space'</span>;</div>
+                <div class="code-line"><span class="keyword">async function</span> <span class="function">init</span>()
+                    {</div>
+                <div class="code-line"> <span class="keyword">await</span> <span class="function">load</span>(<span
+                        class="string">'assets'</span>);</div>
+                <div class="code-line"> <span class="keyword">await</span> <span class="function">render</span>(<span
+                        class="string">'content'</span>);</div>
+                <div class="code-line"> <span class="keyword">return</span> <span class="string">'ready'</span>;</div>
+                <div class="code-line">}</div>
+            </div>
+        </div>
+    </div>
+    <div class="cursor"></div>
+    <!-- Sticky Navigation -->
+    <nav id="sticky-nav" class="sticky-nav">
+
+        <div class="nav-links">
+            <a href="#Landing" class="nav-brand">Galen Green</a>
+            <a href="#About" class="nav-link">About</a>
+            <a href="#Skills" class="nav-link">Skills</a>
+            <a href="#Experience" class="nav-link">Experience</a>
+            <a href="#Development" class="nav-link">Projects</a>
+            <a href="#Photography" class="nav-link">Photography</a>
+        </div>
+        <button class="burger-menu" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="social-links">
+            <a href="mailto:dev@galengreen.space" class="social-link" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/galen-green-9b8835297/" target="_blank" class="social-link"
+                aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+            <a href="https://github.com/galengreen/" target="_blank" class="social-link" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                    </path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/galengreen.space/" target="_blank" class="social-link"
+                aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#Landing" class="mobile-nav-brand">Galen Green</a>
+        <a href="#About" class="mobile-nav-link">About</a>
+        <a href="#Skills" class="mobile-nav-link">Skills</a>
+        <a href="#Experience" class="mobile-nav-link">Experience</a>
+        <a href="#Development" class="mobile-nav-link">Projects</a>
+        <a href="#Photography" class="mobile-nav-link">Photography</a>
+        <div class="mobile-social-links">
+            <a href="mailto:dev@galengreen.space" class="social-link" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/galen-green-9b8835297/" target="_blank" class="social-link"
+                aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+            <a href="https://github.com/galengreen/" target="_blank" class="social-link" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                    </path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/galengreen.space/" target="_blank" class="social-link"
+                aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+    </div>
 
     <div id="main">
-
-        <div class="content landing" id=" Landing">
-            <h1
-                style="text-align: center; font-weight:400 ; font-size: min(10vw, 10vh, 1.5cm); padding-top:  min(15vh - 5vw, 30vh) ;">
-                I'm Galen Green</h1>
-
-            <div>
-                <h2 style="text-align: center; font-weight:500; font-size: min(5vw, 5vh, 0.75cm);">
-                    <button <a href="#Developer">Developer</a></button>
-                    •
-                    <button <a href="#Photographer">Photographer </a></button>
-                </h2>
-
+        <div class="content landing" id="Landing">
+            <div class="content-inner">
+                <h1 class="landing-title">I'm Galen Green</h1>
+                <div class="landing-nav-group">
+                    <a href="#About" class="landing-nav-link">About</a>
+                    <a href="#Development" class="landing-nav-link">Development</a>
+                    <a href="#Photography" class="landing-nav-link">Photography</a>
+                </div>
+                <img src="profile/DSCF3886.jpg" alt="Galen Green" class="center fade-in profile-image">
             </div>
-
-            </h2>
-            <img src="images/DSCF3886.jpg" alt="Galen Green" class="center"
-                style="width:auto; max-height: min(100vw, 65vh, 25cm); mix-blend-mode: lighten;">
         </div>
 
         <!-- About Section -->
-
         <div class="content about" id="About">
+            <div class="content-inner">
+                <h2 class="section-title">About</h2>
 
+                <div class="about-text">
+                    <p>
+                        <span class="highlight">I'm a 2nd year software engineering student</span> passionate about
+                        solving real-world problems with really great and ethical technology.
+                    </p>
 
-            <p style=" text-align: center; font-size: min(0.43cm, 3vw);">
+                    <p>
+                        I excel in adapting to new challenges, collaborating with teams,
+                        and approaching problem-solving with a hands-on, determined mindset.
+                        Committed to making a positive impact, I bring a friendly and proactive
+                        can-do attitude and a dedication to quality and improvement.
+                    </p>
 
-                <nobr>I’m a 2nd year software engineering student passionate about</nobr>
-                <nobr>solving real-world problems with really great and ethical technology.</nobr>
+                    <p class="subtitle">Technical Skills</p>
+                    <p>
+                        Proficient in full-stack development, with a focus on creating
+                        intuitive and efficient solutions. Experienced in various programming
+                        languages and frameworks, with a particular interest in building
+                        ethical and user-centric applications.
+                    </p>
 
-                <nobr>I excel in adapting to new challenges, collaborating with teams,</nobr>
-                <nobr>and approaching problem-solving with a hands-on, determined mindset.</nobr>
+                    <p class="subtitle">Beyond Code</p>
+                    <p>
+                        My passion for technology extends beyond software development.
+                        I'm deeply interested in the intersection of hardware and software,
+                        from electronics to embedded systems, and enjoy bringing digital
+                        solutions into the physical world.
+                    </p>
 
-                <nobr>Committed to making a positive impact, I bring a friendly and proactive</nobr>
-                <nobr>can-do attitude and a dedication to quality and improvement.</nobr>
-
-                <nobr>In my free time, I enjoy learning new technical skills, photography,</nobr>
-                <nobr>graphic design, electronics ,leatherwork and solving puzzles.</nobr>
-
-                <nobr>Additionally, I have a passion for high-end art knife making,</nobr>
-                <nobr>carpentry, playing the clarinet, electric guitar and going on hikes.</nobr>
-            </p>
-
-
-
+                    <div class="interests">
+                        <span class="interest-tag">Photography</span>
+                        <span class="interest-tag">Graphic Design</span>
+                        <span class="interest-tag">Electronics</span>
+                        <span class="interest-tag">Leatherwork</span>
+                        <span class="interest-tag">Art Knife Making</span>
+                        <span class="interest-tag">Carpentry</span>
+                        <span class="interest-tag">Clarinet</span>
+                        <span class="interest-tag">Electric Guitar</span>
+                        <span class="interest-tag">Hiking</span>
+                        <span class="interest-tag">Puzzle Solving</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- End About Section -->
+        <!-- Development Section -->
+        <section id="development" class="content">
+            <div class="content-inner">
+                <h2 class="section-title">Development</h2>
+                <div class="carousel-container">
+                    <div class="carousel-title">Featured Projects</div>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="project-item">
+                                <h3>Mailchimp Magic</h3>
+                                <p>A web-based tool for cleaning and optimizing Mailchimp HTML emails, specifically
+                                    designed for embedding into iframes.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/galengreen/mailchimp_magic" target="_blank"
+                                        class="project-button">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <h3>Autonomous Vehicle Challenge</h3>
+                                <p>C++ project focused on autonomous vehicle development and control systems.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/galengreen/Autonomous-Vehicle-Challenge" target="_blank"
+                                        class="project-button">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <h3>Web Scraper</h3>
+                                <p>Python-based web scraping tool for data collection and analysis.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/galengreen/Web-scraper" target="_blank"
+                                        class="project-button">View Project</a>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <h3>ShelfPlayer WatchOS</h3>
+                                <p>Native Audiobookshelf player for WatchOS, enhancing the audiobook listening
+                                    experience on Apple Watch.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/galengreen/ShelfPlayerWatchOS" target="_blank"
+                                        class="project-button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-prev" aria-label="Previous project">←</button>
+                        <button class="carousel-next" aria-label="Next project">→</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Development Section -->
+
+        <!-- Experience & Education Section -->
+        <div class="content" id="Experience">
+            <div class="content-inner">
+                <h2 class="section-title">Experience & Education</h2>
+                <div class="experience-education-container">
+                    <!-- Experience Column -->
+                    <div class="experience-column">
+                        <h3 class="column-title">Experience</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 class="timeline-title">Engineering Tutor</h3>
+                                    <h4 class="timeline-company">Victoria University of Wellington</h4>
+                                    <p class="timeline-date">Mar 2025 - Present</p>
+                                    <ul class="timeline-description">
+                                        <li>Part-time role in Wellington, New Zealand</li>
+                                        <li>Focus on C++ programming and engineering concepts</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 class="timeline-title">Website Administrator</h3>
+                                    <h4 class="timeline-company">External Reporting Board</h4>
+                                    <p class="timeline-date">Mar 2024 - Present</p>
+                                    <ul class="timeline-description">
+                                        <li>Contract position in Wellington, New Zealand</li>
+                                        <li>Maintain and improve website functionality</li>
+                                        <li>Implement analytics tools for site traffic monitoring</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 class="timeline-title">Engineering Technology Tutor (ENGR101)</h3>
+                                    <h4 class="timeline-company">Victoria University of Wellington</h4>
+                                    <p class="timeline-date">Feb 2024 - Jun 2024</p>
+                                    <ul class="timeline-description">
+                                        <li>Part-time role focusing on C++ and Java</li>
+                                        <li>Guided students in robotics and networked systems projects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Column -->
+                    <div class="education-column">
+                        <h3 class="column-title">Education</h3>
+                        <div class="education-container">
+                            <div class="education-item">
+                                <h3 class="education-title">Bachelor of Software Engineering</h3>
+                                <h4 class="education-school">Victoria University of Wellington</h4>
+                                <p class="education-date">2023 - 2026</p>
+                                <div class="education-details">
+                                    <h5 class="education-subtitle">Skills Developed</h5>
+                                    <ul class="education-courses">
+                                        <li>C++</li>
+                                        <li>Java</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="education-item">
+                                <h3 class="education-title">Foundation Studies</h3>
+                                <h4 class="education-school">UP Education</h4>
+                                <p class="education-date">Apr 2022 - Nov 2022</p>
+                                <div class="education-details">
+                                    <ul class="education-achievements">
+                                        <li>Study Award Scholarship</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Experience & Education Section -->
+
+        <!-- Skills Section -->
+        <div class="content" id="Skills">
+            <div class="content-inner">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="skills-container">
+                    <div class="skills-category">
+                        <h3 class="skills-title">Programming Languages</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">Java</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">C++</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">HTML</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CSS</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3 class="skills-title">Multimedia & Design</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">Video Editing (Final Cut & Premiere)</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Audio Editing (Adobe Audition)</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Photo Editing (Adobe Photoshop)</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Graphic Design (Adobe Illustrator)</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3 class="skills-title">Fabrication & Technical Skills</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">CAD/CAM (Fusion 360)</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Robotics/Mechatronics</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Carpentry & Metalwork</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Electronic Maintenance</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Skills Section -->
 
         <!-- Portfolio Section -->
         <div class="content" id="Photography">
-            <!-- Grid for photos -->
-
-            <div>
-                <div class="half">
-
-                    <div class="photo">
-                        <img src="images/IMG_3328.JPG">
-                    </div>
-                    <div class="photo">
-                        <img src="images/IMG_3338.JPG">
-                    </div>
-                    <div class="photo">
-                        <img src="images/IMG_3366.JPG">
-                    </div>
-                    <div class="photo">
-                        <img src="images/IMG_0612.JPG">
-                    </div>
+            <div class="content-inner">
+                <h2 class="section-title">Photography</h2>
+                <div class="photo-grid">
+                    <!-- Photos will be loaded dynamically by script.js -->
                 </div>
+            </div>
 
-                <div class="half">
-
-                    <div class="photo">
-                        <img src="images/IMG_3365.JPG">
+            <!-- Signature Section -->
+            <div class="signature-section">
+                <a href="#Landing" class="signature">
+                    <img src="profile/signature.png" alt="Galen Green signature" class="signature-img">
+                    <div class="copyright-text">&copy; Galen Green <span id="copyright-year"></span>. All rights
+                        reserved.
                     </div>
-                    <div class="photo">
-                        <img src="images/IMG_3335.JPG">
-                    </div>
-                    <div class="photo">
-                        <img src="images/IMG_3375.JPG">
-                    </div>
-                    <div class="photo">
-
-                        <img src="images/IMG_3460.JPG">
-                    </div>
-                </div>
-                <!-- End photo grid -->
-
+                </a>
             </div>
         </div>
         <!-- End Portfolio Section -->
 
-        <!-- Contact Section -->
-        <div id="Contact">
-
-        </div>
-        <!-- End Contact Section -->
-
-        <div style="height:2cm;">
-
-        </div>
-
-
     </div>
 
+    <!-- Lightbox moved outside main content -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" class="lightbox-img" alt="Enlarged view">
+        <button class="lightbox-close">&times;</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
